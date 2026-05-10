@@ -1,10 +1,15 @@
 <?php
-// 🔥 DYNAMIC CSS PATH - WORKS EVERYWHERE
-require_once dirname(dirname(__FILE__)) . '/config/database.php';
-
+// 🔥 DYNAMIC PATH DETECTION - WORKS FROM ANY FOLDER
 $currentPath = $_SERVER['SCRIPT_NAME'];
-$isRoot = strpos($currentPath, '/admin/') === false && strpos($currentPath, '/creator/') === false;
-$cssPath = $isRoot ? 'css/style.css' : '../css/style.css';
+$isRootLevel = (strpos($currentPath, '/creator/') === false && strpos($currentPath, '/admin/') === false);
+$pathPrefix = $isRootLevel ? '' : '../';
+
+// 🔥 LOAD SHARED FUNCTIONS (if not already loaded)
+if (!function_exists('isLoggedIn')) {
+    require_once dirname(dirname(__FILE__)) . '/config/database.php';
+}
+
+// Use existing functions from database.php
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,17 +25,21 @@ $cssPath = $isRoot ? 'css/style.css' : '../css/style.css';
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- 🔥 UNIVERSAL CSS - WORKS FROM ANY FOLDER -->
-    <link href="<?=$cssPath?>" rel="stylesheet">
+    <!-- 🔥 UNIVERSAL CSS -->
+    <link href="<?=$pathPrefix?>css/style.css" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <?php if(isset($extra_css)): echo $extra_css; endif; ?>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="bg-light">
     <!-- Fixed Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-glass">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
         <div class="container">
             <a class="navbar-brand fw-bold fs-3" href="/">
                 <i class="fas fa-utensils me-2"></i>Recipe Platform
@@ -43,53 +52,53 @@ $cssPath = $isRoot ? 'css/style.css' : '../css/style.css';
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) === 'index.php' ? 'active fw-bold' : ''; ?>" 
+                           href="<?=$pathPrefix?>index.php">Home</a>
                     </li>
-                    <?php if(isLoggedIn()): ?>
+                    <?php if(function_exists('isLoggedIn') && isLoggedIn()): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="creator/dashboard.php">Create</a>
+                        <a class="nav-link <?php echo strpos($_SERVER['PHP_SELF'], 'dashboard.php') !== false ? 'active fw-bold' : ''; ?>" 
+                           href="<?=$pathPrefix?>creator/dashboard.php">Create</a>
                     </li>
                     <?php endif; ?>
                 </ul>
                 
                 <ul class="navbar-nav">
-                    <?php if(isLoggedIn()): ?>
+                    <?php if(function_exists('isLoggedIn') && isLoggedIn()): ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle me-1"></i><?=getUsername()?>
-                                <?php if(isAdmin()): ?>
+                                <i class="fas fa-user-circle me-1"></i><?=htmlspecialchars(getUsername())?>
+                                <?php if(function_exists('isAdmin') && isAdmin()): ?>
                                     <span class="badge bg-warning text-dark ms-1 fs-6">🛡️ ADMIN</span>
                                 <?php endif; ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow">
-                                <li><a class="dropdown-item" href="profile.php">
+                                <li><a class="dropdown-item" href="<?=$pathPrefix?>profile.php">
                                     <i class="fas fa-user me-2"></i>Profile
                                 </a></li>
-                                <?php if(isLoggedIn()): ?>
-                                <li><a class="dropdown-item" href="creator/dashboard.php">
+                                <li><a class="dropdown-item" href="<?=$pathPrefix?>creator/dashboard.php">
                                     <i class="fas fa-plus-circle me-2"></i>Create Recipe
                                 </a></li>
-                                <?php endif; ?>
-                                <?php if(isAdmin()): ?>
+                                <?php if(function_exists('isAdmin') && isAdmin()): ?>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-warning fw-bold" href="admin/dashboard.php">
+                                    <li><a class="dropdown-item text-warning fw-bold" href="<?=$pathPrefix?>admin/dashboard.php">
                                         <i class="fas fa-shield-alt me-2"></i>🛡️ Admin Panel
                                     </a></li>
                                 <?php endif; ?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="logout.php">
+                                <li><a class="dropdown-item text-danger" href="<?=$pathPrefix?>logout.php">
                                     <i class="fas fa-sign-out-alt me-2"></i>Logout
                                 </a></li>
                             </ul>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.php">
+                            <a class="nav-link" href="<?=$pathPrefix?>login.php">
                                 <i class="fas fa-sign-in-alt me-1"></i>Login
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="register.php">
+                            <a class="nav-link" href="<?=$pathPrefix?>register.php">
                                 <i class="fas fa-user-plus me-1"></i>Register
                             </a>
                         </li>
@@ -99,15 +108,5 @@ $cssPath = $isRoot ? 'css/style.css' : '../css/style.css';
         </div>
     </nav>
 
-    <!-- Content Spacer -->
-    <div class="content-spacer"></div>
-
-<?php
-// CSS for glass navbar
-$extra_css = '
-<style>
-.bg-glass { background: rgba(255,255,255,0.95) !important; backdrop-filter: blur(20px); }
-.content-spacer { padding-top: 100px; }
-@media (max-width: 991px) { .content-spacer { padding-top: 80px; } }
-</style>';
-?>
+    <!-- Content Spacer for fixed navbar -->
+    <div style="padding-top: 80px;"></div>
