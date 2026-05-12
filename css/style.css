@@ -11,12 +11,13 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Beautiful gradient background */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     color: #333;
 }
 
-/* Navbar */
+/* Navbar - Glass morphism effect */
 .navbar {
     background: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(10px);
@@ -26,6 +27,7 @@ body {
 .navbar-brand {
     font-size: 1.8rem;
     font-weight: 800;
+    /* Gradient text effect */
     background: linear-gradient(45deg, #667eea, #764ba2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -43,7 +45,7 @@ body {
     color: #667eea !important;
 }
 
-/* Cards */
+/* Cards - Modern design with hover effects */
 .card {
     border: none;
     border-radius: 20px;
@@ -57,7 +59,7 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-/* Recipe Cards */
+/* Recipe Cards - Enhanced hover animations */
 .recipe-card {
     transition: all 0.4s ease;
     position: relative;
@@ -79,7 +81,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Buttons */
+/* Buttons - Gradient + lift effect */
 .btn {
     border-radius: 25px;
     font-weight: 600;
@@ -89,6 +91,7 @@ body {
 }
 
 .btn-primary {
+    /* Primary gradient */
     background: linear-gradient(45deg, #667eea, #764ba2);
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
@@ -99,8 +102,8 @@ body {
 }
 
 .btn-outline-primary {
+    /* FIXED: Removed duplicate 'color;' syntax error */
     border-color: #667eea;
-    color;
     color: #667eea;
 }
 
@@ -109,7 +112,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Forms */
+/* Forms - Smooth focus states */
 .form-control {
     border-radius: 12px;
     border: 2px solid #e9ecef;
@@ -122,7 +125,7 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
 }
 
-/* Alerts */
+/* Alerts - Gradient backgrounds */
 .alert {
     border-radius: 15px;
     border: none;
@@ -139,7 +142,7 @@ body {
     color: white;
 }
 
-/* Dashboard Stats */
+/* Dashboard Stats - Large numbers */
 .card.text-white {
     border-radius: 15px;
 }
@@ -150,7 +153,7 @@ body {
     margin-bottom: 0;
 }
 
-/* Tables */
+/* Tables - Gradient headers */
 .table {
     border-radius: 15px;
     overflow: hidden;
@@ -166,14 +169,14 @@ body {
     background-color: rgba(102, 126, 234, 0.1);
 }
 
-/* Admin Panel */
+/* Admin Panel - Gradient backgrounds */
 .bg-primary { background: linear-gradient(45deg, #667eea, #764ba2) !important; }
 .bg-success { background: linear-gradient(45deg, #56ab2f, #a8e6cf) !important; }
 .bg-warning { background: linear-gradient(45deg, #f093fb, #f5576c) !important; }
 .bg-danger { background: linear-gradient(45deg, #ff416c, #ff4b2b) !important; }
 .bg-info { background: linear-gradient(45deg, #4facfe, #00f2fe) !important; }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 768px) {
     .recipe-card img { height: 150px; }
     .card-body h3 { font-size: 2rem; }
@@ -189,13 +192,15 @@ body {
     animation: fadeInUp 0.6s ease forwards;
 }
 
-/* Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
+
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
+
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, #667eea, #764ba2);
     border-radius: 10px;
