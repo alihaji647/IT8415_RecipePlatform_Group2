@@ -1,4 +1,4 @@
-# IT8415 Recipe Platform - Group 2
+# IT8415 Recipe Platform - Group 2 
 
 A secure, database-driven recipe sharing platform developed for the **IT8415 Database Programming 2** course at Bahrain Polytechnic.
 
