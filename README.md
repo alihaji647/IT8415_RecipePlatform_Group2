@@ -11,3 +11,11 @@ Environment: Apache Server (localhost) / MySQL / PHP (PDO)
 
 Repository: https://github.com/alihaji647/IT8415_RecipePlatform_Group2
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+📋 Table of Contents
+Project Overview
+Team Members
+Key Features
+Tech Stack
+Installation Guide
+Database Schema (DDL)
+Project Structure
