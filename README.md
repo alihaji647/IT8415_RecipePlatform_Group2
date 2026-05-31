@@ -161,11 +161,11 @@ Administrative reports are generated using MySQL stored procedures for efficient
 
 | Name             | Role                         | Student ID |
 | ---------------- | ---------------------------- | ---------- |
-| Ali Haji         | Group Leader                 | 202201868  |
-| Hasan Janahi     | Core Developer               | 202203109  |
-| Yusuf Naser      | Database Architecture        | 202002664  |
-| Ali Sarhan       | Quality Assurance Specialist | 202204628  |
-| Rashed Alsowaidi | Frontend Designer            | 202305787  |
+| Ali Haji         | Group Leader + Database, ERD, SQL, Stored Procedure, Security                | 202201868  |
+| Hasan Janahi     | Authentication, Roles, Sessions, User Management             | 202203109  |
+| Yusuf Naser      | Content CRUD, Creator Panel, Uploads, Pagination        | 202002664  |
+| Ali Sarhan       | Search, Comments, Ratings, Reports | 202204628  |
+| Rashed Alsowaidi | UI, AJAX, jQuery, Trigger, Testing, Documentation            | 202305787  |
 
 ## Course Information
 
